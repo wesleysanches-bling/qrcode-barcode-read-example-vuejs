@@ -1,0 +1,407 @@
+/* Estilos Compartilhados para Scanners */
+
+.qrcode-reader,
+.barcode-reader {
+  width: 100%;
+}
+
+/* Remover overlay e linha laser padrão da biblioteca (usamos nossos próprios) */
+:deep(.overlay-element),
+:deep(.laser) {
+  display: none !important;
+}
+
+/* Scan Button Base */
+.scan-button {
+  color: white;
+  font-size: 1em;
+  padding: 1.5em;
+  border-radius: 16px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  margin: 1rem auto;
+  max-width: 300px;
+}
+
+.scan-button:hover {
+  transform: translateY(-4px);
+}
+
+.scan-button:active {
+  transform: translateY(-2px);
+}
+
+.button-icon {
+  font-size: 3em;
+  line-height: 1;
+}
+
+.button-text {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.button-text strong {
+  font-size: 1.1em;
+}
+
+.button-text small {
+  font-size: 0.85em;
+  opacity: 0.9;
+  font-weight: normal;
+}
+
+/* Scanning Header */
+.scanning-header {
+  margin-bottom: 1rem;
+}
+
+.scan-type-badge {
+  display: inline-block;
+  background-color: #42b983;
+  color: white;
+  padding: 0.5em 1.2em;
+  border-radius: 20px;
+  font-size: 0.9em;
+  font-weight: bold;
+  margin-top: 0.5rem;
+}
+
+/* Cancel Button */
+.cancel-button {
+  background-color: #ff6b6b;
+  color: white;
+  font-size: 1em;
+  padding: 0.8em 1.5em;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-top: 1rem;
+}
+
+.cancel-button:hover {
+  background-color: #ee5253;
+  transform: translateY(-2px);
+}
+
+/* Camera */
+.camera-wrapper {
+  margin: 1.5rem 0;
+}
+
+.camera-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #000;
+  min-height: 450px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+}
+
+.camera-container video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Scan Overlay */
+.scan-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+}
+
+.scan-area {
+  position: relative;
+  background-color: transparent;
+  border: 3px solid #42b983;
+  border-radius: 12px;
+  box-shadow: 
+    0 0 0 9999px rgba(0, 0, 0, 0.5),
+    0 0 15px rgba(66, 185, 131, 0.8);
+}
+
+/* Corners */
+.corner {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-color: #42b983;
+  border-style: solid;
+}
+
+.corner-tl {
+  top: -2px;
+  left: -2px;
+  border-width: 4px 0 0 4px;
+  border-top-left-radius: 12px;
+}
+
+.corner-tr {
+  top: -2px;
+  right: -2px;
+  border-width: 4px 4px 0 0;
+  border-top-right-radius: 12px;
+}
+
+.corner-bl {
+  bottom: -2px;
+  left: -2px;
+  border-width: 0 0 4px 4px;
+  border-bottom-left-radius: 12px;
+}
+
+.corner-br {
+  bottom: -2px;
+  right: -2px;
+  border-width: 0 4px 4px 0;
+  border-bottom-right-radius: 12px;
+}
+
+/* Scan Line Animation */
+.scan-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #42b983, transparent);
+  box-shadow: 0 0 10px #42b983;
+  animation: scan-horizontal 2s ease-in-out infinite;
+}
+
+.scan-line-vertical {
+  width: 2px;
+  height: auto;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  background: linear-gradient(180deg, transparent, #42b983, transparent);
+  animation: scan-vertical 2s ease-in-out infinite;
+}
+
+@keyframes scan-horizontal {
+  0%, 100% {
+    top: 0;
+    opacity: 0;
+  }
+  50% {
+    top: calc(100% - 2px);
+    opacity: 1;
+  }
+}
+
+@keyframes scan-vertical {
+  0%, 100% {
+    top: 0;
+    opacity: 0;
+  }
+  50% {
+    top: calc(100% - 2px);
+    opacity: 1;
+  }
+}
+
+.camera-status {
+  color: #42b983;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
+.scanning-text {
+  color: #42b983;
+  font-weight: bold;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+/* Result Display */
+.result-display.success {
+  background: linear-gradient(135deg, #1e1e1e 0%, #2a4a3a 100%);
+  border: 3px solid #42b983;
+  padding: 2rem;
+  animation: slideIn 0.5s ease-out;
+  border-radius: 12px;
+  margin: 1.5rem auto;
+  max-width: 800px;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.success-icon {
+  font-size: 4em;
+  color: #42b983;
+  margin-bottom: 0.5rem;
+  animation: scaleIn 0.5s ease-out;
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.success-title {
+  font-size: 1.3em;
+  color: #42b983;
+  font-weight: bold;
+  margin-bottom: 0.8rem;
+}
+
+.scan-type-result {
+  display: inline-block;
+  background-color: rgba(66, 185, 131, 0.2);
+  color: #42b983;
+  padding: 0.4em 1em;
+  border-radius: 16px;
+  font-size: 0.95em;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.code-value {
+  background-color: rgba(66, 185, 131, 0.1);
+  padding: 1.5rem;
+  border-radius: 12px;
+  margin-top: 1rem;
+  border: 1px solid rgba(66, 185, 131, 0.3);
+}
+
+.code-label {
+  font-size: 0.9em;
+  color: #888;
+  margin-bottom: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.result-text {
+  font-size: 1.8em;
+  font-weight: bold;
+  color: #42b983;
+  word-break: break-all;
+  font-family: 'Courier New', monospace;
+  letter-spacing: 2px;
+  line-height: 1.4;
+}
+
+.error-message {
+  color: #ff6b6b;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
+.info-text {
+  color: #aaa;
+  font-size: 0.95em;
+  margin-bottom: 1rem;
+}
+
+/* Scan Area Sizes */
+.scan-area-square {
+  width: 280px;
+  height: 280px;
+}
+
+.scan-area-rectangle {
+  width: 95%;
+  max-width: 100%;
+  height: 180px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .camera-container {
+    min-height: 350px;
+  }
+
+  .button-icon {
+    font-size: 2.5em;
+  }
+
+  .result-text {
+    font-size: 1.3em;
+    letter-spacing: 1px;
+  }
+
+  .success-icon {
+    font-size: 3em;
+  }
+
+  .success-title {
+    font-size: 1.1em;
+  }
+
+  .corner {
+    width: 25px;
+    height: 25px;
+  }
+
+  .scan-area-square {
+    width: 220px;
+    height: 220px;
+  }
+
+  .scan-area-rectangle {
+    width: 92%;
+    height: 140px;
+  }
+}
+
+@media (max-width: 480px) {
+  .camera-container {
+    min-height: 300px;
+    border-radius: 12px;
+  }
+
+  .result-text {
+    font-size: 1.1em;
+  }
+
+  .scan-area-square {
+    width: 180px;
+    height: 180px;
+  }
+
+  .scan-area-rectangle {
+    width: 90%;
+    height: 120px;
+  }
+}
+
